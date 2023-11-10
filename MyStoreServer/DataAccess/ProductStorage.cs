@@ -19,10 +19,10 @@ namespace MyStoreServer.DataAccess
 
         public void DeleteProduct(Guid productId)
         {
-            var task = DbContext.Products.FirstOrDefault(x => x.Id == productId)
-                ?? throw new Exception($"Task with {productId} ID was not found. ");
+            var product = DbContext.Products.FirstOrDefault(x => x.Id == productId)
+                ?? throw new Exception($"Product with {productId} ID was not found. ");
 
-            DbContext.Remove(task);
+            DbContext.Remove(product);
             DbContext.SaveChanges();
         }
 

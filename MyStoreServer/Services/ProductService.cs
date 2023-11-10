@@ -28,17 +28,17 @@ namespace MyStoreServer.Services
 
         public void DeleteProduct(Guid productId)
         {
-            throw new NotImplementedException();
+            _productStorage.DeleteProduct(productId);
         }
 
         public Product GetProduct(Guid productId)
         {
-            throw new NotImplementedException();
+            return _productStorage.GetProduct(productId);
         }
 
         public IEnumerable<Product> GetProducts()
         {
-            throw new NotImplementedException();
+            return _productStorage.GetProducts();
         }
     }
 }

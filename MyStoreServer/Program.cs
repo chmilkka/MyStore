@@ -19,6 +19,8 @@ internal class Program
 
         builder.Services.AddTransient<IProductService, ProductService>();
         builder.Services.AddScoped<IProductStorage, ProductStorage>();
+        builder.Services.AddTransient<IRegistrationService, RegistrationService>();
+        builder.Services.AddScoped<IUserStorage, UserStorage>();
 
         var app = builder.Build();
 
