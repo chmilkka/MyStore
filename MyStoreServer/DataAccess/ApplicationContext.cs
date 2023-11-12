@@ -21,7 +21,10 @@ namespace MyStoreServer.DataAccess
             modelBuilder.Entity<User>()
                 .Property(x => x.Id)
                 .IsRequired();
-           
+
+            modelBuilder.Entity<User>()
+               .HasIndex(x => x.Email)
+               .IsUnique();
         }
     }
 }

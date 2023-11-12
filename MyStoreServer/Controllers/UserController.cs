@@ -10,17 +10,10 @@ namespace MyStoreServer.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly IRegistrationService _registrationService;
-        public UserController(IRegistrationService registrationService)
+        private readonly IUserService _userService;
+        public UserController(IUserService userService)
         {
-            _registrationService = registrationService;
-        }
-
-        [HttpPost]
-        public ActionResult CreateUser([FromBody] RegistrationModel request)
-        {
-            _registrationService.CreateUser(request);
-            return Ok();
-        }
+            _userService = userService;
+        }      
     }
 }

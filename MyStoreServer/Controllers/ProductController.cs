@@ -1,6 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MyStoreServer.Models;
+using MyStoreServer.Policy;
 using MyStoreServer.Services;
+using System.Data;
 
 namespace MyStoreServer.Controllers
 {
@@ -39,20 +42,13 @@ namespace MyStoreServer.Controllers
             _productService.CreateProduct(request);
             return Ok();
         }
-        
-        
+
+        [Authorize(Policy = Policies.Admin)]
         [HttpDelete("{id}")]
         public ActionResult DeleteProduct(Guid id)
-        {
-            try
-            {
-                _productService.DeleteProduct(id);
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+        {           
+            _productService.DeleteProduct(id);
+            return Ok();         
         }
     }
 }

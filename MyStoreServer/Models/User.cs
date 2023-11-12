@@ -12,4 +12,10 @@
         public string? Photo { get; set; }
 
     }
+    public enum Role
+    {
+        User,
+        Admin
+    }
+
 }

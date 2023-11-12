@@ -23,5 +23,12 @@ namespace MyStoreServer.DataAccess
             DbContext.Remove(user);
             DbContext.SaveChanges();
         }
+
+        public User GetUser(string email)
+        {
+            var user = DbContext.Users.FirstOrDefault(x => x.Email == email)
+                ?? throw new Exception($"User with {email} email was not found. ");
+            return user;
+        }
     }
 }
