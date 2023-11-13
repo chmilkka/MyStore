@@ -30,7 +30,7 @@ namespace MyStoreServer.DataAccess
         public Product GetProduct(Guid productId)
         {
             var product = DbContext.Products.FirstOrDefault(x => x.Id == productId)
-                ?? throw new Exception($"Product with {productId} ID was not found. ");
+                ?? throw new NotFoundException(nameof(Product), nameof(productId));
             return product;
         }
 

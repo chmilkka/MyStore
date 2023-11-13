@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.JsonWebTokens;
 using Microsoft.IdentityModel.Tokens;
 using MyStoreServer.DataAccess;
+using MyStoreServer.Exceptions;
 using MyStoreServer.Models;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -26,12 +27,12 @@ namespace MyStoreServer.Services
         }
         public User UserVerification(LoginModel request)
         {
-            var user = _userStorage.GetUser(request.Email);
+            var user = _userStorage.GetUserByEmail(request.Email);
             if (user.Password == request.Password)
             {
                 return user;
             }
-            throw new Exception($"Incorrect email or password. ");
+            throw new BadRequestException();
         }
         public string GenerateToken(User user)
         {            

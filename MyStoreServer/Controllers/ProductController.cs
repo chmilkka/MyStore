@@ -17,12 +17,14 @@ namespace MyStoreServer.Controllers
             _productService = tasksService;
         }
 
+        [Authorize]
         [HttpGet]
         public ActionResult GetProducts()
         {
             return Ok(_productService.GetProducts());
         }
 
+        [Authorize]
         [HttpGet("{id}")]
         public ActionResult GetProduct([FromRoute] Guid id)
         {
@@ -36,6 +38,7 @@ namespace MyStoreServer.Controllers
             }
         }
 
+        [Authorize(Policy = Policies.Admin)]
         [HttpPost]
         public ActionResult CreateProduct([FromBody] Product request)
         {

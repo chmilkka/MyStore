@@ -1,4 +1,5 @@
-﻿using MyStoreServer.Models;
+﻿using MyStoreServer.Exceptions;
+using MyStoreServer.Models;
 
 namespace MyStoreServer.DataAccess
 {
@@ -18,17 +19,27 @@ namespace MyStoreServer.DataAccess
         public void DeleteUser(Guid userId)
         {
             var user = DbContext.Users.FirstOrDefault(x => x.Id == userId)
-                ?? throw new Exception($"User with {userId} ID was not found. ");
+                ?? throw new NotFoundException(nameof(User), nameof(userId));
 
             DbContext.Remove(user);
             DbContext.SaveChanges();
         }
 
-        public User GetUser(string email)
+        public User GetUserByEmail(string email)
         {
             var user = DbContext.Users.FirstOrDefault(x => x.Email == email)
-                ?? throw new Exception($"User with {email} email was not found. ");
+                ?? throw new NotFoundException(nameof(User), nameof(email));
             return user;
+        }
+        public User GetUserById(Guid userId)
+        {
+            var user = DbContext.Users.FirstOrDefault(x => x.Id == userId)
+                ?? throw new NotFoundException(nameof(User), nameof(userId));
+            return user;
+        }
+        public void SaveChanges()
+        {
+            DbContext.SaveChanges();
         }
     }
 }
