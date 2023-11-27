@@ -9,6 +9,8 @@ import LoginPage from '../pages/LoginPage';
 import RegisterPage from '../pages/RegisterPage';
 import ProductsPage from '../pages/ProductsPage';
 import TypesPage from '../pages/TypesPage';
+import { Auth } from './RequiresAuth';
+import { Roles } from '../models/UserModel';
 
 
 const AllRoutes = () => {
@@ -19,7 +21,7 @@ const AllRoutes = () => {
             <Routes>
                 <Route path ="/login" element={<LoginPage/>}/>
                 <Route path="/register" element={<RegisterPage/>}/>
-                <Route path="/products" element={<ProductsPage/>}/>
+                <Route path="/products" element={<Auth ><ProductsPage /></Auth>}/>
                 <Route path="/types" element={<TypesPage/>}/>
                 <Route path='*'element={<NotFoundPage/>}/>
             </Routes>   
