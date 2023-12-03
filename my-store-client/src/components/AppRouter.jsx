@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import Loader from './Loader/Loader';
+import Loader from './Loader/LoadingComponent';
 import { privateRoutes, publicRoutes } from '../routes/routes';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { Switch } from '@mui/material';

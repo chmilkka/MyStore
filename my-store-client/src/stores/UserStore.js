@@ -16,13 +16,8 @@ export default class UserStore {
 
     login = async (creds) => {
         const response = await agent.Auth.login(creds);
-
-        this.base.handleErrors(response);
-
-        console.debug("login successful, token - " + response.value);
-        store.commonStore.setToken(response.value);
-
-        return response.isSuccessful;
+        console.log("login successful, token - " + response);
+        store.commonStore.setToken(response);
     };
 
     logout = () => {

@@ -9,6 +9,7 @@ using MyStoreServer.Policy;
 using MyStoreServer.Services;
 using System.Net;
 using System.Text;
+using System.Text.Json.Serialization;
 
 internal class Program
 {
@@ -22,7 +23,22 @@ internal class Program
         string connection = builder.Configuration.GetConnectionString("DefaultConnection");
         builder.Services.AddDbContext<ApplicationContext>(options => options.UseSqlServer(connection));
 
-        builder.Services.AddControllers();
+        builder.Services.AddControllers().AddJsonOptions(x =>
+        {
+            // serialize enums as strings in api responses (e.g. Role)
+            x.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+        }) ;
+
+        builder.Services.AddCors(options =>
+        {
+            options.AddDefaultPolicy(builder =>
+            {
+                builder
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyMethod();
+            });
+        });
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen(c =>
@@ -113,8 +129,15 @@ internal class Program
             }
             app.UseMiddleware<ErrorHandlingMiddleware>();
             app.UseHttpsRedirection();
+            app.UseCors(builder =>
+            {
+                builder
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader();
+            });
 
-            app.UseAuthentication();
+        app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapControllers();

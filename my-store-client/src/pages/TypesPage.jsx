@@ -1,3 +1,4 @@
+import { Typography } from "@mui/material";
 import Header from "../components/Header";
 import ProductTypesList from "../components/ProdutTypesList";
 
@@ -5,7 +6,12 @@ const TypesPage = () => {
     return (
         <div>
             <Header/>
-            <h1>Household Appliances</h1>     
+            <Typography variant= "h3"
+                       sx={{
+                        textAlign: "center"        
+                      }}>
+                Household Appliances
+            </Typography>     
             <ProductTypesList/>
         </div>
     );

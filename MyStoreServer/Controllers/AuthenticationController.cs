@@ -10,7 +10,7 @@ using System.Text;
 
 namespace MyStoreServer.Controllers
 {
-    [Route("api/test")]
+    [Route("api/authentication")]
     [ApiController]
     public class AuthenticationController : ControllerBase
     {
@@ -21,9 +21,28 @@ namespace MyStoreServer.Controllers
             _authenticationService = authenticationService;
             _userService = userService;
         }
+        [HttpGet]
+        public User GetAuthenticatedUserInfo()
+        {
+            var claims = HttpContext.User.Claims;
 
-        
-        [HttpPost("auth")]
+            if (!claims.Any())
+            {
+                return new User();
+            }
+
+            var userId = claims.First(x => x.Type == ClaimTypes.NameIdentifier).Value;
+
+            if (!Guid.TryParse(userId, out var id))
+            {
+               throw new SecurityTokenInvalidTypeException("Invalid token provided");
+            }
+
+            return _userService.GetUserById(Guid.Parse(userId));
+        }
+
+
+        [HttpPost("login")]
         public ActionResult UserAuthentication([FromBody] LoginModel request)
         {
             var user = _authenticationService.UserVerification(request);
@@ -31,11 +50,11 @@ namespace MyStoreServer.Controllers
             return Ok(token);
         }
 
-        [HttpPost]
+        [HttpPost("register")]
         public ActionResult CreateUser([FromBody] RegistrationModel request)
         {
             _userService.CreateUser(request);
             return Ok();
-        }
+        } 
     }
 }
