@@ -4,25 +4,28 @@ import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import ProductsPage from "./pages/ProductsPage";
 import TypesPage from "./pages/TypesPage";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import AppRouter from "./components/AppRouter";
 import { AuthContext } from "./context/context";
 import { ToastContainer } from "react-toastify";
 import { observable } from "mobx";
 import { observer } from "mobx-react-lite";
+import AppLoader from "./AppLoader";
+import LoadingComponent from "./components/Loader/LoadingComponent";
+import { useStore } from "./stores/StoresManager";
 
 
 
 function App() {
-  // const stores = useStore();
+  const stores = useStore();
   
-  // useEffect(() => {
-  //   AppLoader(stores);
-  // }, [stores]);
+  useEffect(() => {
+    AppLoader(stores);
+  }, [stores]);
 
-  // if (!stores.commonStore.appLoaded) {
-  //   return <LoadingComponent />;
-  // }
+  if (!stores.commonStore.appLoaded) {
+    return <LoadingComponent />;
+  }
   return (
   //   <AuthContext.Provider value={{
   //     isAuth,
@@ -35,7 +38,7 @@ function App() {
     <ToastContainer 
     position={"bottom-right"} 
     limit={3} 
-    autoClose={10000} 
+    autoClose={5000} 
     hideProgressBar={false}
     />
     </React.StrictMode>

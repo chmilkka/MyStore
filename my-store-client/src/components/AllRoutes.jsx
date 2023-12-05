@@ -22,7 +22,7 @@ const AllRoutes = () => {
                 <Route path ="/login" element={<LoginPage/>}/>
                 <Route path="/register" element={<RegisterPage/>}/>
                 <Route path="/products" element={<Auth ><ProductsPage /></Auth>}/>
-                <Route path="/types" element={<TypesPage/>}/>
+                <Route path="/types" element={<Auth ><TypesPage/></Auth>}/>
                 <Route path='*'element={<NotFoundPage/>}/>
             </Routes>   
 

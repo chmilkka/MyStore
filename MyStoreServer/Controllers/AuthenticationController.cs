@@ -28,7 +28,7 @@ namespace MyStoreServer.Controllers
 
             if (!claims.Any())
             {
-                return new User();
+                return null;
             }
 
             var userId = claims.First(x => x.Type == ClaimTypes.NameIdentifier).Value;

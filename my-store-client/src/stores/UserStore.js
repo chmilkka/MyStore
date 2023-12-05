@@ -2,6 +2,7 @@ import { makeAutoObservable } from "mobx";
 import { store } from "./StoresManager";
 import { toast } from "react-toastify";
 import { agent } from "./agent";
+import { Roles } from "../models/UserModel";
 
 export default class UserStore {
     user = null;
@@ -18,6 +19,15 @@ export default class UserStore {
         const response = await agent.Auth.login(creds);
         console.log("login successful, token - " + response);
         store.commonStore.setToken(response);
+        const userInfo = await this.getAutenticatedUserInfo();
+        if(userInfo?.role === Roles.Admin) {
+            this.logout();
+            toast.error("Pupils are not allowed to access the web system");
+            return false;
+        } 
+
+        this.user = userInfo;
+        return response.isSuccessful;
     };
 
     logout = () => {
@@ -46,20 +56,20 @@ export default class UserStore {
         } else {
             const response = await agent.Auth.getAuthenticatedUserInfo();
 
-            this.base.handleErrors(response);
+            // this.base.handleErrors(response);
             
-            if(response.value !== null) {
-                this.user = response.value;
+            if(response !== null) {
+                this.user = response;
             }
 
-            return response.value;
+            return response;
         }
     }
 
     getUserInfo = async (userId) => {
         const response = await agent.User.getUser(userId);
 
-        this.base.handleErrors(response);
+        // this.base.handleErrors(response);
 
         if(response.isSuccessful && !this.otherUsers.includes(response.value)) {
             this.otherUsers.push(response.value);

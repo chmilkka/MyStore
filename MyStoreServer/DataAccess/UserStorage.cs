@@ -11,9 +11,9 @@ namespace MyStoreServer.DataAccess
             DbContext = dbContext;
         }
         public void CreateUser(User user)
-        {
+        {         
             DbContext.Add(user);
-            DbContext.SaveChanges();
+            DbContext.SaveChanges();                              
         }
 
         public void DeleteUser(Guid userId)

@@ -22,7 +22,7 @@ const LoginForm=()=>{
         
         try {
              await userStore.login(user);
-            
+             redirectToTypes()
         } catch (error) {
             console.log(error)
             toast.error(error)
@@ -32,6 +32,9 @@ const LoginForm=()=>{
     const navigate = useNavigate();
     const redirectToRegister = () => {
         navigate("/register", { replace: true });
+    }
+    const redirectToTypes = () => {
+        navigate("/types", { replace: true });
     }
 
     const paperStyle={padding :20,height:'70vh',width:280, margin:"20px auto"}

@@ -38,7 +38,9 @@ const RegisterForm=()=>{
             role: role,
         };
         try {
-            const result = await userStore.register(user);
+            await userStore.register(user);
+            toast.success("Your account has been successfully registered!")
+            redirectToLogin();
             
         } catch (error) {
             console.log(error)
