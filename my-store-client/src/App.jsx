@@ -27,21 +27,17 @@ function App() {
     return <LoadingComponent />;
   }
   return (
-  //   <AuthContext.Provider value={{
-  //     isAuth,
-  //     setIsAuth,
-  //     isLoading
-  // }}>
+  
     <BrowserRouter>
-    <React.StrictMode>
-    <AppRouter/>
-    <ToastContainer 
-    position={"bottom-right"} 
-    limit={3} 
-    autoClose={5000} 
-    hideProgressBar={false}
-    />
-    </React.StrictMode>
+      <React.StrictMode>
+        <AppRouter/>
+          <ToastContainer 
+            position={"bottom-right"} 
+            limit={3} 
+            autoClose={5000} 
+            hideProgressBar={false}
+          />
+      </React.StrictMode>
     </BrowserRouter>
     
     

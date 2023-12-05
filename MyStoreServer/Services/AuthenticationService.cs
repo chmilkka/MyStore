@@ -32,7 +32,7 @@ namespace MyStoreServer.Services
             {
                 return user;
             }
-            throw new BadRequestException();
+            throw new IncorrectCredentialsException();
         }
         public string GenerateToken(User user)
         {            

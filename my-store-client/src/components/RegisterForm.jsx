@@ -10,10 +10,13 @@ const RegisterForm=()=>{
     const EMAIL_REGEX = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/
 
     const [email, setEmail] = useState('');
+    const [emailErrors, setEmailErrors] = useState('');
 
     const [password, setPassword] = useState('');
+    const [passwordErrors, setPasswordErrors] = useState("");
 
     const [repeatPassword, setRepeatPassword] = useState('');
+    const [repeatPasswordErrors, setRepeatPasswordErrors] = useState('');
 
     const [role, setRole] = useState(0);
 
@@ -28,23 +31,65 @@ const RegisterForm=()=>{
             firstRender.current = false;
             return;
         }
+        validateForm();
 
     }, [ email, password, repeatPassword, role]);
 
+    const validateForm = () => {
+        validateEmail();
+        validatePassword();
+        validateRepeatPassword();
+    }
+    const validateEmail = () => {
+        if (email.length === 0) {
+            setEmailErrors("Fill in the email input");
+        } else if (!email.match(EMAIL_REGEX)) {
+            setEmailErrors("Email should be correct")
+        } else {
+            setEmailErrors('');
+        }
+    }
+
+    const validatePassword = () => {
+        if (password.length === 0) {
+            setPasswordErrors("Fill in the password input");
+        } else {
+            setPasswordErrors('');
+        }
+    }
+
+    const validateRepeatPassword = () => {
+        if (repeatPassword.length === 0) {
+            setRepeatPasswordErrors("Fill in the password input");
+        } else if (repeatPassword !== password) {
+            setRepeatPasswordErrors("Passwords did not match")
+        } else {
+            setRepeatPasswordErrors('');
+        }
+    }
+
+    const hasErrors = () => 
+        emailErrors.length 
+        || passwordErrors.length 
+        || repeatPasswordErrors.length;
+
     const submit = async () => {
+        if (hasErrors()) {
+            return;
+        }
         const user = {
             email: email, 
             password: password,
             role: role,
         };
         try {
-            await userStore.register(user);
+            const a = await userStore.register(user); 
+            console.log(a)
             toast.success("Your account has been successfully registered!")
-            redirectToLogin();
+            redirectToLogin(); 
             
         } catch (error) {
-            console.log(error)
-            toast.error(error)
+            toast.error(error.response.data.error)
         }
         
         
@@ -70,6 +115,8 @@ const RegisterForm=()=>{
                 placeholder='Enter your Email' 
                 fullWidth required
                 value={email}
+                helperText={emailErrors}
+                error={emailErrors.length !== 0}
                 aria-required="true"
                 onChange={e => setEmail(e.target.value)}
                 />
@@ -80,6 +127,8 @@ const RegisterForm=()=>{
                 type='password' 
                 fullWidth required
                 value={password}
+                helperText={passwordErrors}
+                error={passwordErrors.length !== 0}
                 aria-required="true"
                 onChange={e => setPassword(e.target.value)}
                 /> 
@@ -89,6 +138,8 @@ const RegisterForm=()=>{
                 type='password' 
                 fullWidth required
                 value={repeatPassword}
+                helperText={repeatPasswordErrors}
+                error={repeatPasswordErrors.length !== 0}
                 aria-required="true"
                 onChange={e => setRepeatPassword(e.target.value)}
                 />

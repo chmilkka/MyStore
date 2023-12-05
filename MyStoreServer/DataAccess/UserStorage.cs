@@ -11,9 +11,17 @@ namespace MyStoreServer.DataAccess
             DbContext = dbContext;
         }
         public void CreateUser(User user)
-        {         
-            DbContext.Add(user);
-            DbContext.SaveChanges();                              
+        {
+            try
+            {
+                DbContext.Add(user);
+                DbContext.SaveChanges();
+            }
+            catch (Exception)
+            {
+                throw new IncorrectCredentialsException();
+            }
+                                     
         }
 
         public void DeleteUser(Guid userId)
@@ -28,7 +36,7 @@ namespace MyStoreServer.DataAccess
         public User GetUserByEmail(string email)
         {
             var user = DbContext.Users.FirstOrDefault(x => x.Email == email)
-                ?? throw new NotFoundException(nameof(User), nameof(email));
+                ?? throw new IncorrectCredentialsException();
             return user;
         }
         public User GetUserById(Guid userId)

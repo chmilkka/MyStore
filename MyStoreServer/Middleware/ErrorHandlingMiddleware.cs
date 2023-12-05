@@ -40,7 +40,17 @@ namespace MyStoreServer.Middleware
             {
                 message = exception.Message;
                 status = HttpStatusCode.NotFound;              
-            }         
+            }   
+            else if (exceptionType == typeof(BadRequestException))
+            {
+                message = exception.Message;
+                status = HttpStatusCode.BadRequest;
+            }
+            else if (exceptionType == typeof(IncorrectCredentialsException))
+            {
+                message = exception.Message;
+                status = HttpStatusCode.Forbidden;
+            }
             else
             {
                 message = "Unknown error happend";

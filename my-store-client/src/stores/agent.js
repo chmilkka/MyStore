@@ -55,7 +55,6 @@ export const agent = {
 };
 
 function checkStatusCode (error) {
-    console.log(error)
     const {status} = error;
     switch (status) {
         case 400:
@@ -84,7 +83,6 @@ function checkStatusCode (error) {
             redirect("/notFound");
             break;
         case 500:
-            console.log(error.data.errors)
             error.data.errors.map(e => toast.error(e.detail));                
             break;
     }

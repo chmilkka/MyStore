@@ -25,7 +25,7 @@ const LoginForm=()=>{
              redirectToTypes()
         } catch (error) {
             console.log(error)
-            toast.error(error)
+            toast.error(error.response.data.error)
         }
     };
 
