@@ -11,6 +11,7 @@ import ProductsPage from '../pages/ProductsPage';
 import TypesPage from '../pages/TypesPage';
 import { Auth } from './RequiresAuth';
 import { Roles } from '../models/UserModel';
+import { useStore } from '../stores/StoresManager';
 
 
 const AllRoutes = () => {
@@ -20,6 +21,7 @@ const AllRoutes = () => {
        
             <Routes>
                 <Route path ="/login" element={<LoginPage/>}/>
+                <Route path ="/logout" element={<Logout/>}/>
                 <Route path="/register" element={<RegisterPage/>}/>
                 <Route path="/products" element={<Auth ><ProductsPage /></Auth>}/>
                 <Route path="/types" element={<Auth ><TypesPage/></Auth>}/>
@@ -29,5 +31,15 @@ const AllRoutes = () => {
            
     );
 };
+
+function Logout() {
+    const { userStore } = useStore();
+
+    userStore.logout();
+
+    return (
+        <Navigate to="/login" replace={true}/>
+    )
+}
 
 export default AllRoutes;

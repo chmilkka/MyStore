@@ -1,10 +1,10 @@
-import Header from "../components/Header";
+import AuthHeader from "../components/AuthHeader";
 import RegisterForm from "../components/RegisterForm";
 
 const RegisterPage = () => {
     return (
         <div>
-            <Header/>
+            <AuthHeader/>
             <RegisterForm/>           
         </div>
     );
