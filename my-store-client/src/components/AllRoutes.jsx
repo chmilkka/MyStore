@@ -12,6 +12,7 @@ import TypesPage from '../pages/TypesPage';
 import { Auth } from './RequiresAuth';
 import { Roles } from '../models/UserModel';
 import { useStore } from '../stores/StoresManager';
+import ProfilePage from '../pages/ProfilePage';
 
 
 const AllRoutes = () => {
@@ -23,6 +24,7 @@ const AllRoutes = () => {
                 <Route path ="/login" element={<LoginPage/>}/>
                 <Route path ="/logout" element={<Logout/>}/>
                 <Route path="/register" element={<RegisterPage/>}/>
+                <Route path ="/profile" element={<ProfilePage/>}/>
                 <Route path="/products" element={<Auth ><ProductsPage /></Auth>}/>
                 <Route path="/types" element={<Auth ><TypesPage/></Auth>}/>
                 <Route path='*'element={<NotFoundPage/>}/>

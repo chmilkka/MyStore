@@ -12,22 +12,32 @@ function Header()
     const logout = () => {
         navigate('/logout');
     }
+    const profile = () => {
+        navigate('/profile');
+    }
+    const types = () => {
+        navigate('/types');
+    }
+
 
     return (
         <AppBar position="static">
             <Toolbar>
-                <Typography 
-                variant="h4" 
-                sx={{flexGrow: 1}}
-                >
-                    MyStore
-                </Typography>
+                <Button
+                    color="inherit" 
+                    fullWidth 
+                    onClick={types}
+                    sx={{height: "70px", fontSize: 24, justifyContent: 'left' }}>
+                        MyStore
+                </Button>
+                
                 <IconButton
                 size="large"
                 aria-label="account of current user"
                 aria-controls="menu-appbar"
                 aria-haspopup="true"            
                 color="inherit"
+                onClick={profile}
               >
                 <AccountCircle />
               </IconButton>

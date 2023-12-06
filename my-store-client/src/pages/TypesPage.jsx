@@ -6,10 +6,11 @@ const TypesPage = () => {
     return (
         <div>
             <Header/>
-            <Typography variant= "h3"
-                       sx={{
-                        textAlign: "center"        
-                      }}>
+            <Typography
+                variant= "h4"
+                sx={{
+                textAlign: "center"        
+                }}>
                 Household Appliances
             </Typography>     
             <ProductTypesList/>

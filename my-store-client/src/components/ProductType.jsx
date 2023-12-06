@@ -1,11 +1,19 @@
 import { Button, Card, CardActions, CardContent, CardMedia, Grid, IconButton, Typography } from "@mui/material"
+import { useNavigate } from "react-router-dom";
 
 
 const ProductType = (props) => {
 
+    const navigate = useNavigate();
+
+    const redirectToProducts = () => {
+        navigate("/products", { replace: true });
+    }
+
     return (
         <Grid container item xs={12} md={3}>
             <Card
+            
                 sx={{
                     padding: "5px 10px",
                     height: '100%',
@@ -25,17 +33,15 @@ const ProductType = (props) => {
                     }}
                 />
                 <CardContent >
-                    <Typography
-                    variant="h5"
-                       sx={{ 
-                        display: "inline-block",
-                        width: "350px",
-                        whiteSpace: "nowrap",
-                        overflow: "hidden !important",
-                        textOverflow: "ellipsis"}}
-                    >
-                            NameNameNameNameName
-                    </Typography>                                  
+                    
+                    <Button
+                    variant="text"
+                    size="large"
+                    fullWidth
+                    onClick={redirectToProducts}
+                    > 
+                    NameNameNameNameName
+                    </Button>                                 
                 </CardContent>               
             </Card>
         </Grid>

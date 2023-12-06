@@ -9,8 +9,8 @@ const ProductTypesList = (props) => {
             display: "flex",
             justifyContent: "center"
 
-        }} >
-           <ProductType/>
+        }}>
+            <ProductType/>
            <ProductType/>
            <ProductType/>
            <ProductType/>
