@@ -2,12 +2,12 @@ import { Button, Card, CardActions, CardContent, CardMedia, Grid, IconButton, Ty
 import { useNavigate } from "react-router-dom";
 
 
-const ProductType = (props) => {
+const ProductType = ({type}) => {
 
     const navigate = useNavigate();
 
     const redirectToProducts = () => {
-        navigate("/products", { replace: true });
+        navigate(`/products/${type}`, { replace: true });
     }
 
     return (
