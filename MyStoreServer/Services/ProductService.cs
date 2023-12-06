@@ -36,6 +36,11 @@ namespace MyStoreServer.Services
             return _productStorage.GetProduct(productId);
         }
 
+        public IEnumerable<Product> GetProductsByType(string type)
+        {
+            return _productStorage.GetProductsByType(type);
+        }
+
         public IEnumerable<Product> GetProducts()
         {
             return _productStorage.GetProducts();

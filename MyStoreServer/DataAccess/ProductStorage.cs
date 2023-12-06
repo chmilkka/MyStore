@@ -34,6 +34,13 @@ namespace MyStoreServer.DataAccess
             return product;
         }
 
+        public IEnumerable<Product> GetProductsByType(string type)
+        {
+            var product = DbContext.Products.Where(x => x.Type == type)
+                ?? throw new NotFoundException(nameof(Product), nameof(type));
+            return product;
+        }
+
         public IEnumerable<Product> GetProducts()
         {
             return DbContext.Products;

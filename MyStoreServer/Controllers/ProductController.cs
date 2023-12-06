@@ -7,7 +7,7 @@ using System.Data;
 
 namespace MyStoreServer.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/products")]
     [ApiController]
     public class ProductController : Controller
     {
@@ -25,7 +25,14 @@ namespace MyStoreServer.Controllers
         }
 
         [Authorize]
-        [HttpGet("{id}")]
+        [HttpGet("{type}")]
+        public ActionResult GetProductsByType([FromRoute] string type)
+        {
+            return Ok(_productService.GetProductsByType(type));
+        }
+
+        [Authorize]
+        [HttpGet("{id}/searchById")]
         public ActionResult GetProduct([FromRoute] Guid id)
         {
             try
