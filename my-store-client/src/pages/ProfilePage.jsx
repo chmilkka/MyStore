@@ -1,7 +1,10 @@
 import { Button, Card, CardMedia, Grid, TextField, Typography } from "@mui/material";
 import Header from "../components/Header";
+import BasicModal from "../components/BasicModal";
 
 const ProfilePage = () => {
+
+    
     
     return (
         <div>
@@ -62,14 +65,7 @@ const ProfilePage = () => {
                     </Button>
                     <div></div>
                     <div></div>
-                    <Button 
-                        type='submit' 
-                        color='success' 
-                        variant="contained" 
-                        sx={{margin: "10px 0"}} 
-                        >
-                            Create product
-                    </Button>
+                   <BasicModal/>
                     <Button 
                         type='submit' 
                         color='error' 
