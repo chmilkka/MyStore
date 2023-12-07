@@ -44,7 +44,7 @@ const Auth = {
 }
 
 const User = {
-    updateUser: (body) => requests.put("/user", body),
+    updateUser: (body) => requests.put("/user/profile", body),
     getUser: (id) => requests.get(`/user/${id}`),
     removeUser: (id) => requests.delete(`/user/${id}`),
 }

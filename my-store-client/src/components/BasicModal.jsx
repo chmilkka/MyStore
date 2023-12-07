@@ -9,7 +9,7 @@ const modalStyle = {
   left: '50%',
   transform: 'translate(-50%, -50%)',
   width: 800,
-  height: 400,
+  height: 500,
   bgcolor: 'background.paper',
   border: '2px solid #000',
   boxShadow: 24,
@@ -62,7 +62,7 @@ export default function BasicModal() {
            <div></div>
            <InputLabel>Type</InputLabel>
            <Select
-                sx={{width: "280px", margin:"20px", textAlign: "left", color: "inherit"}}
+                sx={{width: "280px", margin:"5px", textAlign: "left", color: "inherit"}}
                 value={type}
                 label = "Type"
                 onChange={handleChange}
@@ -81,6 +81,18 @@ export default function BasicModal() {
                 multiline
             />
             <div></div>
+            <TextField 
+                variant='outlined'
+                label='Price(UAH)' 
+                sx={{width: "35ch", margin:"5px"}}            
+           />
+            <div></div>
+           <TextField 
+                variant='outlined'
+                label='Quantity' 
+                sx={{width: "35ch"}}            
+           />
+           <div></div>
             <Button 
                 type='submit' 
                 color='success' 

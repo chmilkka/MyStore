@@ -5,7 +5,7 @@ import { useStore } from "../stores/StoresManager";
 export const Auth = ({children, role = null}) => {
     const { userStore } = useStore();
 
-    if (!userStore.isLoggedIn) {
+    if (!userStore.isLoggedIn) { 
         return <Navigate to='/login' />
     }
 

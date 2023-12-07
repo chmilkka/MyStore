@@ -20,12 +20,6 @@ export default class UserStore {
         console.log("login successful, token - " + response);
         store.commonStore.setToken(response);
         const userInfo = await this.getAutenticatedUserInfo();
-        if(userInfo?.role === Roles.Admin) {
-            this.logout();
-            toast.error("Pupils are not allowed to access the web system");
-            return false;
-        } 
-
         this.user = userInfo;
         return response.isSuccessful;
     };
@@ -36,8 +30,13 @@ export default class UserStore {
         this.user = null;
     };
 
-    updateUserInfo = async (user) =>
-        await this.base.simpleRequest(async () => await agent.User.updateUser(user));
+    updateUserInfo = async (user) => {
+        const response = await agent.User.updateUser(user);
+        await this.getUserInfo(this.user.id);
+         return response
+    }
+         
+
 
     confirmEmail = async (key) => {
         const response = await agent.Auth.confirmEmail(key);
@@ -68,13 +67,11 @@ export default class UserStore {
 
     getUserInfo = async (userId) => {
         const response = await agent.User.getUser(userId);
-
-        // this.base.handleErrors(response);
-
-        if(response.isSuccessful && !this.otherUsers.includes(response.value)) {
-            this.otherUsers.push(response.value);
+        console.log(response)
+        if(response !== null) {
+            this.user = response;
         }
+        console.log(this.user)
 
-        return response.value;
     }
 }
