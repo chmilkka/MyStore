@@ -7,7 +7,7 @@ using MyStoreServer.Services;
 
 namespace MyStoreServer.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/user")]
     [ApiController]
     public class UserController : ControllerBase
     {
@@ -18,11 +18,25 @@ namespace MyStoreServer.Controllers
         }
 
         [Authorize]
-        [HttpPatch("profile")]
+        [HttpPut("profile")]
         public ActionResult ChangeProfile(UserProfileModel profile)
         {
             _userService.ChangeUserProfile(profile);
             return Ok();
+        }
+
+        [Authorize]
+        [HttpGet("{id}")]
+        public ActionResult GetProduct([FromRoute] Guid id)
+        {
+            try
+            {
+                return Ok(_userService.GetUserById(id));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [Authorize]
