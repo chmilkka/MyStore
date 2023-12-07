@@ -49,9 +49,15 @@ const User = {
     removeUser: (id) => requests.delete(`/user/${id}`),
 }
 
+const Products = {
+    createProduct: (body) => requests.post(`/products`, body),
+    getProductsByType: (type) => requests.get(`/products/${type}`), 
+}
+
 export const agent = {
     Auth,
     User,
+    Products,
 };
 
 function checkStatusCode (error) {
