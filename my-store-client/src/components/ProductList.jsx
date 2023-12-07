@@ -2,25 +2,18 @@ import { Grid } from "@mui/material"
 
 import ProductItem from './ProductItem'
 
-const ProductList = (props) => {
+const ProductList = ({products}) => {
 
     return (        
         <Grid container spacing={3}  
         sx={{
             display: "flex",
             justifyContent: "center"
-
         }} >
-           <ProductItem/>
-           <ProductItem/>
-           <ProductItem/>
-           <ProductItem/>
-           <ProductItem/>
-           <ProductItem/>
-           <ProductItem/>
-           <ProductItem/>
-           <ProductItem/>
-           <ProductItem/>
+            {products.map((item) => (
+                <ProductItem   {...item} />
+            ))}
+           
 
         </Grid>
     );

@@ -1,6 +1,5 @@
 import { Grid } from "@mui/material"
 import ProductType from "./ProductType";
-import { Blender } from "@mui/icons-material";
 
 const ProductTypesList = (props) => {
 
@@ -11,10 +10,10 @@ const ProductTypesList = (props) => {
             justifyContent: "center"
 
         }}>
-            <ProductType type="blenders"/>
-           <ProductType type="kettles"/>
-           <ProductType type="refrigerators"/>
-           <ProductType type="multicookerders"/>
+            <ProductType type="blender" name="Blenders" photo="https://cdn.comfy.ua/media/catalog/product/b/r/braun_mq3135wh_1.jpg" />
+           <ProductType type="kettle" name="Electric Kettles" photo="https://cdn.comfy.ua/media/catalog/product/r/k/rkt80-gp.jpg" />
+           <ProductType type="refrigerator" name="Refrigerators" photo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNCnV83KmtJ9gaa0r3KpN37l5-g_y71phGNA&usqp=CAU" />
+           <ProductType type="multicooker" name="Multicookers" photo="https://cdn.comfy.ua/media/catalog/product/r/m/rmc508-w_001.jpg" />
            <ProductType/>
            <ProductType/>
            <ProductType/>

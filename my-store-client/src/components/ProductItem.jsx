@@ -2,7 +2,7 @@ import { ShoppingCart } from "@mui/icons-material";
 import { Button, Card, CardActions, CardContent, CardMedia, Grid, IconButton, Typography } from "@mui/material"
 
 
-const ProductItem = (props) => {
+const ProductItem = ({name, price, photo}) => {
 
     return (
         <Grid container item xs={12} md={2.3}>
@@ -15,7 +15,7 @@ const ProductItem = (props) => {
             >
                 
                 <CardMedia
-                    image="https://content2.rozetka.com.ua/goods/images/big_tile/377542135.png"
+                    image={photo}
                     component="img"
                     alt= " "
                     title= " "
@@ -36,9 +36,9 @@ const ProductItem = (props) => {
                         overflow: "hidden !important",
                         textOverflow: "ellipsis"}}
                     >
-                            NameNameNameNameNameNameNameName
+                            {name}
                     </Typography>                  
-                    <Typography variant="body1">Price: $.</Typography>
+                    <Typography variant="body1">Price: {price} UAH.</Typography>
                 </CardContent>
                 <CardActions>
                 <IconButton color="inherit">

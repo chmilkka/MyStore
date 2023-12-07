@@ -2,7 +2,7 @@ import { Button, Card, CardActions, CardContent, CardMedia, Grid, IconButton, Ty
 import { useNavigate } from "react-router-dom";
 
 
-const ProductType = ({type}) => {
+const ProductType = ({type, name, photo}) => {
 
     const navigate = useNavigate();
 
@@ -15,20 +15,21 @@ const ProductType = ({type}) => {
             <Card
             
                 sx={{
+                    maxWidth: 345,
                     padding: "5px 10px",
                     height: '100%',
                     boxShadow: "rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px"
                 }}
             >
                 <CardMedia
-                    image="https://content2.rozetka.com.ua/goods/images/big_tile/377542135.png"
+                    image={photo}
                     component="img"
                     alt= " "
                     title= " "
                     sx={{ 
                         width: 335,
-                        height: 230,
-                        padding: "10px 0px "
+                        height: 350,
+
 
                     }}
                 />
@@ -40,7 +41,7 @@ const ProductType = ({type}) => {
                     fullWidth
                     onClick={redirectToProducts}
                     > 
-                    NameNameNameNameName
+                    {name}
                     </Button>                                 
                 </CardContent>               
             </Card>
