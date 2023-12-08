@@ -21,7 +21,7 @@ namespace MyStoreServer.Services
                 Description = request.Description,
                 Quantity = request.Quantity,
                 Price = request.Price,
-                Photo = request.Photo,
+                Photo = "https://cdn-icons-png.flaticon.com/512/18/18530.png"
             };
             _productStorage.CreateProduct(product);
         }

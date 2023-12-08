@@ -28,6 +28,7 @@ namespace MyStoreServer.Services
                 Email = request.Email,
                 Password = request.Password,
                 Role = request.Role.ToString(),
+                Photo = "https://anavara.com/wp-content/uploads/2020/05/blank-profile-pic.png"
             };
             _userStorage.CreateUser(user);
         }

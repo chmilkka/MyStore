@@ -63,14 +63,14 @@ const ProfilePage = () => {
             id: currentUser.id,
             firstName: firstName,
             lastName: lastName,
-            photo: " "
+            photo: currentUser.photo
         };
 
-        try {
-            await userStore.updateUserInfo(user);
+        try { 
+            await userStore.updateUserInfo(user); 
             toast.success("Your account has been successfully updated!")            
         } catch (error) {
-            toast.error("dsgfdsfdsf")
+            toast.error("Failed to update profile")
         }
     }
 
@@ -100,7 +100,7 @@ const ProfilePage = () => {
                     </Typography> 
                     <Card sx={{width: "40ch"}}>
                         <CardMedia
-                         image="https://content2.rozetka.com.ua/goods/images/big_tile/377542135.png"
+                         image={currentUser.photo}
                          component="img"
                          alt= " "
                          title= " "
@@ -148,15 +148,22 @@ const ProfilePage = () => {
                     </Button>
                     <div></div>
                     <div></div>
-                   <BasicModal/>
-                    <Button 
-                        type='submit' 
-                        color='error' 
-                        variant="contained" 
-                        sx={{margin: "10px "}} 
-                        >
-                            Delete product
-                    </Button>
+                    {
+                    currentUser.role === "Admin"
+                     &&
+                     <>
+                     <BasicModal/>
+                     <Button 
+                         type='submit' 
+                         color='error' 
+                         variant="contained" 
+                         sx={{margin: "10px "}} 
+                         >
+                             Delete product
+                     </Button>
+                     </>
+                    }
+                   
                 </Grid>
            
         </div>

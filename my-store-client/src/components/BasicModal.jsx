@@ -1,5 +1,7 @@
 import { Box, Button, InputLabel, MenuItem, Modal, Select, TextField, Typography } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useStore } from "../stores/StoresManager";
+import { toast } from "react-toastify";
 
 
 const modalStyle = {
@@ -17,15 +19,98 @@ const modalStyle = {
 };
 
 export default function BasicModal() {
+
+
+  const { productStore } = useStore();
+
+  const [name, setName] = useState('');
+  const [nameErrors, setNameErrors] = useState('');
+
+  const [description, setDescription] = useState('');
+
+  const [price, setPrice] = useState('');
+  const [priceErrors, setPriceErrors] = useState('');
+
+  const [quantity, setQuantity] = useState('');
+  const [quantityErrors, setQuantityErrors] = useState('');
+
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   const [type, setType] = useState('');
 
+   useEffect(() => {    
+        validateForm();
+    }, [ name, price, quantity]);
+
+     const validateForm = () => {
+        validateName();
+        validatePrice();
+        validateQuantity();
+    }
+
   const handleChange = (event) => {
     setType(event.target.value);
   };
+
+  const validateName = () => {
+      if (name.length === 0) {
+        setNameErrors("Fill in the Name input");
+      } 
+      else {
+        setNameErrors('');
+      }
+  } 
+
+  const validatePrice = () => {
+      if (price.length === 0) {
+        setPriceErrors("Fill in the Price input");
+      }   
+      else {
+        setPriceErrors('');
+      }
+  }
+  
+   const validateQuantity = () => {
+      if (quantity.length === 0) {
+        setQuantityErrors("Fill in the quantity input");
+      }   
+      else {
+        setQuantityErrors('');
+      }
+  }
+
+  const hasErrors = () => {
+    const hasAnyErrors = nameErrors.length 
+                      || priceErrors.length 
+                      || quantityErrors.length
+    return hasAnyErrors;
+}
+
+const submit = async () => {
+  if (hasErrors()) {
+      return;
+  }
+
+  const product = {
+      name: name,
+      type: type,
+      description: description,
+      price: price,
+      quantity: quantity
+  };
+
+  try {
+      const a = await productStore.createProduct(product);
+      console.log(a)
+      toast.success("Your product has been successfully created!") 
+      handleClose();           
+  } catch (error) {
+      toast.error("Failed to create product")
+  }
+}
+  
 
 
   return (
@@ -57,6 +142,10 @@ export default function BasicModal() {
            <TextField 
                 variant='outlined'
                 label='ProductName' 
+                helperText={nameErrors}
+                error={nameErrors.length !== 0} 
+                value={name}
+                onChange={e => setName(e.target.value)}
                 sx={{width: "35ch"}}            
            />
            <div></div>
@@ -68,14 +157,16 @@ export default function BasicModal() {
                 onChange={handleChange}
             >
             <MenuItem value={"Blender"}>Blender</MenuItem>
-            <MenuItem value={"Electric kettle"}>Electric kettle</MenuItem>
+            <MenuItem value={"Kettle"}>Electric kettle</MenuItem>
             <MenuItem value={"Refrigerator"}>Refrigerator</MenuItem>
             <MenuItem value={"Multicooker"}>Multicooker</MenuItem>
             </Select>
             <div></div>
             <TextField
                 variant='outlined'
-                label='Description' 
+                label='Description'
+                value={description}
+                onChange={e => setDescription(e.target.value)} 
                 rows={4}
                 sx={{width: "35ch"}}
                 multiline
@@ -83,13 +174,23 @@ export default function BasicModal() {
             <div></div>
             <TextField 
                 variant='outlined'
-                label='Price(UAH)' 
+                label='Price(UAH)'
+                type="number"
+                helperText={priceErrors}
+                error={priceErrors.length !== 0} 
+                value={price}
+                onChange={e => setPrice(e.target.value)} 
                 sx={{width: "35ch", margin:"5px"}}            
            />
             <div></div>
            <TextField 
                 variant='outlined'
-                label='Quantity' 
+                label='Quantity'
+                type="number"
+                helperText={quantityErrors}
+                error={quantityErrors.length !== 0} 
+                value={quantity}
+                onChange={e => setQuantity(e.target.value)} 
                 sx={{width: "35ch"}}            
            />
            <div></div>
@@ -97,7 +198,7 @@ export default function BasicModal() {
                 type='submit' 
                 color='success' 
                 variant="contained" 
-                onClick={handleClose}
+                onClick={submit}
                 sx={{margin: "10px 0"}} 
             >
                     Create product

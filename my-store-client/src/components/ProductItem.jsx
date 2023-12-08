@@ -20,7 +20,7 @@ const ProductItem = ({name, price, photo}) => {
                     alt= " "
                     title= " "
                     sx={{ 
-                        height: 160,
+                        height: 220,
                         width: 230,
                         padding: "10px 0px "
 

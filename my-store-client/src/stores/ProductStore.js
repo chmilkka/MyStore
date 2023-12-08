@@ -10,7 +10,7 @@ export default class ProductStore {
     }
 
     createProduct = async (product) =>
-        await this.base.simpleRequest(async () => await this.client.createProduct(product));
+    await this.client.createProduct(product); 
 
 
     getProductsByType = async (type) => {
