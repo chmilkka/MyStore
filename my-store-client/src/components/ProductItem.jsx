@@ -1,8 +1,9 @@
 import { ShoppingCart } from "@mui/icons-material";
 import { Button, Card, CardActions, CardContent, CardMedia, Grid, IconButton, Typography } from "@mui/material"
+import ProductModal from "./ProductModal";
 
 
-const ProductItem = ({name, price, photo}) => {
+const ProductItem = ({name, price, photo, description}) => {
 
     return (
         <Grid container item xs={12} md={2.3}>
@@ -27,17 +28,8 @@ const ProductItem = ({name, price, photo}) => {
                     }}
                 />
                 <CardContent >
-                    <Typography
-                    variant="h5"
-                       sx={{ 
-                        display: "inline-block",
-                        width: "200px",
-                        whiteSpace: "nowrap",
-                        overflow: "hidden !important",
-                        textOverflow: "ellipsis"}}
-                    >
-                            {name}
-                    </Typography>                  
+                    
+                    <ProductModal name = {name} price = {price} photo = {photo} description={description} />                 
                     <Typography variant="body1">Price: {price} UAH.</Typography>
                 </CardContent>
                 <CardActions>
