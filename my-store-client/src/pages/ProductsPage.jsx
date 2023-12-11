@@ -31,7 +31,7 @@ const ProductsPage = () => {
             >
                 {type.toUpperCase() + "S"}
             </Typography>       
-            <ProductList products={products} />
+            <ProductList products={products} removeProduct={(id) => setProducts(products.filter(x => x.id !== id))} />
         </div>
     );
 };

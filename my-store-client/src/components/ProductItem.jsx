@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
 
 
-const ProductItem = ({id, type, name, price, photo, description}) => {
+const ProductItem = ({id, type, name, price, photo, description, removeProduct}) => {
 
     const { userStore } = useStore();
     const { productStore } = useStore();
@@ -18,6 +18,7 @@ const ProductItem = ({id, type, name, price, photo, description}) => {
             
         try {
             await productStore.removeProduct(id, type)
+            removeProduct(id);
             toast.success("Your product has been successfully removed!")           
         } catch (error) {
             toast.error("Failed to remove product")

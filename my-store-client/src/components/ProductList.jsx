@@ -2,7 +2,7 @@ import { Grid } from "@mui/material"
 
 import ProductItem from './ProductItem'
 
-const ProductList = ({products}) => {
+const ProductList = ({products, removeProduct}) => {
 
     return (        
         <Grid container spacing={3}  
@@ -11,7 +11,7 @@ const ProductList = ({products}) => {
             justifyContent: "center"
         }} >
             {products.map((item) => (
-                <ProductItem   {...item} />
+                <ProductItem removeProduct={removeProduct}  {...item} />
             ))}
            
 
