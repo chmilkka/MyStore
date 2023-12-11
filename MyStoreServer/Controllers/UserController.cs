@@ -27,7 +27,7 @@ namespace MyStoreServer.Controllers
 
         [Authorize]
         [HttpGet("{id}")]
-        public ActionResult GetProduct([FromRoute] Guid id)
+        public ActionResult GetUserById([FromRoute] Guid id)
         {
             try
             {

@@ -14,7 +14,7 @@ export const Auth = ({children, role = null}) => {
             return children;
         } else {
             toast.error('You do not have permission to access this page');
-            return <Navigate to='/profile' />
+            return <Navigate to='/login' />
         }
     }
 

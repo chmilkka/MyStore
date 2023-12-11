@@ -106,8 +106,7 @@ const submit = async () => {
   };
 
   try {
-      const a = await productStore.createProduct(product);
-      console.log(a)
+      await productStore.createProduct(product);
       toast.success("Your product has been successfully created!") 
       handleClose();           
   } catch (error) {

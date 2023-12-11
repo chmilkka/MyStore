@@ -55,7 +55,7 @@ namespace MyStoreServer.Controllers
 
         [Authorize(Policy = Policies.Admin)]
         [HttpDelete("{id}")]
-        public ActionResult DeleteProduct(Guid id)
+        public ActionResult DeleteProduct( Guid id)
         {           
             _productService.DeleteProduct(id);
             return Ok();         

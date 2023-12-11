@@ -13,10 +13,8 @@ const ProductsPage = () => {
 
     useEffect(() => {
         const fetchProducts = async () => {
-            var res = await productStore.getProductsByType(type) 
-            console.log(res)
-            setProducts(res);
-            console.log(products)
+            const result = await productStore.getProductsByType(type) 
+            setProducts(result);
         }
 
         fetchProducts();
