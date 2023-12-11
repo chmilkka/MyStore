@@ -52,6 +52,7 @@ const User = {
 const Products = {
     createProduct: (body) => requests.post(`/products`, body),
     getProductsByType: (type) => requests.get(`/products/${type}`), 
+    removeProduct: (id) => requests.delete(`/products/${id}`),
 }
 
 export const agent = {

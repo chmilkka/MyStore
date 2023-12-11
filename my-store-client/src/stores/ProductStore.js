@@ -10,11 +10,16 @@ export default class ProductStore {
     }
 
     createProduct = async (product) =>
-    await this.client.createProduct(product); 
+        await this.client.createProduct(product); 
 
 
     getProductsByType = async (type) => {
         const response = await this.client.getProductsByType(type);
         return response;
+    }
+
+    removeProduct = async (id, type) => {
+        await this.client.removeProduct(id);
+        await this.client.getProductsByType(type); 
     }
 }
