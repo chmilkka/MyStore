@@ -2,6 +2,7 @@ import { AccountCircle, ShoppingCart } from "@mui/icons-material"
 import { AppBar, Button, IconButton, Toolbar, Typography } from "@mui/material"
 import { useStore } from "../stores/StoresManager";
 import { useNavigate } from "react-router-dom";
+import AboutModal from "./AboutModal";
 
 function Header()
 {
@@ -30,7 +31,7 @@ function Header()
                     sx={{height: "70px", fontSize: 24, justifyContent: 'left' }}>
                         MyStore
                 </Button>
-                
+                <AboutModal/>
                 <IconButton
                 size="large"
                 aria-label="account of current user"
