@@ -3,10 +3,12 @@ import { AppBar, Button, IconButton, Toolbar, Typography } from "@mui/material"
 import { useStore } from "../stores/StoresManager";
 import { useNavigate } from "react-router-dom";
 import AboutModal from "./AboutModal";
+import { useState } from "react";
+import Cart from "./Cart";
 
 function Header()
 {
-    const { userStore } = useStore();
+    const [isCartOpen, setCartOpen] = useState(false);
     const navigate = useNavigate();
 
 
@@ -42,9 +44,17 @@ function Header()
               >
                 <AccountCircle />
               </IconButton>
-                <IconButton color="inherit">
+              <IconButton color="inherit" onClick={() => setCartOpen(true)}>
                     <ShoppingCart/>                    
                 </IconButton>
+               
+                    <Cart
+                    cartOpen={isCartOpen}
+                    cartClose={() => setCartOpen(false)}
+                    />
+                
+                
+                
                 <Button color="inherit" onClick={logout}>Log out</Button>              
             </Toolbar>
         </AppBar>
