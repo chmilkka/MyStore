@@ -25,6 +25,23 @@ const ProductItem = ({id, type, name, price, photo, description, removeProduct})
         }
       }
 
+      const addProductToCart= async () => {
+        const product = {
+            id: id,
+            type: type,
+            name: name,
+            price: price,
+            photo: photo
+        }; 
+            
+        try {
+            await productStore.addProductToCart(product) 
+            toast.success("Product added to cart!")           
+        } catch (error) {
+            toast.error("Failed to remove product")
+        }
+      }
+
     return (
         <Grid container item xs={12} md={2.3}>
             
@@ -65,7 +82,7 @@ const ProductItem = ({id, type, name, price, photo, description, removeProduct})
                     <Typography variant="body1">Price: {price} UAH.</Typography>
                 </CardContent>
                 <CardActions>
-                <IconButton color="inherit">
+                <IconButton color="inherit" onClick={addProductToCart}>
                     <ShoppingCart/>                    
                 </IconButton>
                 </CardActions>

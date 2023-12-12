@@ -3,7 +3,6 @@ import { Grid } from "@mui/material"
 import ProductItem from './ProductItem'
 
 const ProductList = ({products, removeProduct}) => {
-
     return (        
         <Grid container spacing={3}  
         sx={{

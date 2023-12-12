@@ -1,8 +1,13 @@
 import { ShoppingCart } from "@mui/icons-material";
 import { Divider, Drawer, List, ListItem, ListItemIcon, ListItemText } from "@mui/material";
+import { useStore } from "../stores/StoresManager";
+import ProductsPage from "../pages/ProductsPage";
+import CartItem from "./CartItem";
 
 const Cart = ({cartOpen, cartClose}) => {
-    
+
+     const { productStore } = useStore();
+
     return (
         <Drawer
             anchor="right"
@@ -14,9 +19,19 @@ const Cart = ({cartOpen, cartClose}) => {
                     <ListItemIcon>
                         <ShoppingCart />
                     </ListItemIcon>
-                    <ListItemText primary="Корзина" />
+                    <ListItemText primary="Cart" />
                 </ListItem>
                 <Divider />
+                {!productStore.cartProducts.length ? (
+                    <ListItem>Корзина пуста!</ListItem>
+                ) : (
+                    <>
+                    {productStore.cartProducts.map((item) => (
+                        <CartItem key={item.name} {...item} />
+                    ))}
+                    <Divider />
+                    </>
+                )}
             </List>
         </Drawer>
     )

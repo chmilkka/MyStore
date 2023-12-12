@@ -3,6 +3,7 @@ import { agent } from "./agent";
 
 export default class ProductStore {
     product = null
+    cartProducts = []
     client = agent.Products
 
     constructor() {
@@ -22,4 +23,10 @@ export default class ProductStore {
         await this.client.removeProduct(id);
         await this.client.getProductsByType(type); 
     }
+
+    addProductToCart = async (product) => {
+        this.cartProducts.push(product);
+        console.log(this.cartProducts)
+    }
+
 }
