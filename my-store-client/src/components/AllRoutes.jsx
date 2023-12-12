@@ -1,16 +1,11 @@
-import React, {useContext} from 'react';
-import Loader from './Loader/LoadingComponent';
-import { privateRoutes, publicRoutes } from '../routes/routes';
+import React from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
-import { Switch } from '@mui/material';
-import { AuthContext } from '../context/context';
 import NotFoundPage from '../pages/NotFoundPage';
 import LoginPage from '../pages/LoginPage';
 import RegisterPage from '../pages/RegisterPage';
 import ProductsPage from '../pages/ProductsPage';
 import TypesPage from '../pages/TypesPage';
 import { Auth } from './RequiresAuth';
-import { Roles } from '../models/UserModel';
 import { useStore } from '../stores/StoresManager';
 import ProfilePage from '../pages/ProfilePage';
 
@@ -21,6 +16,7 @@ const AllRoutes = () => {
     return (
        
             <Routes>
+                <Route index replace element={<Navigate to="/register"/>}/>
                 <Route path ="/login" element={<LoginPage/>}/>
                 <Route path ="/logout" element={<Logout/>}/>
                 <Route path="/register" element={<RegisterPage/>}/>
