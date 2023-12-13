@@ -1,12 +1,23 @@
 import { ShoppingCart } from "@mui/icons-material";
 import { Divider, Drawer, List, ListItem, ListItemIcon, ListItemText } from "@mui/material";
 import { useStore } from "../stores/StoresManager";
-import ProductsPage from "../pages/ProductsPage";
 import CartItem from "./CartItem";
+import { useEffect, useState } from "react";
 
 const Cart = ({cartOpen, cartClose}) => {
 
      const { productStore } = useStore();
+
+     const [cartProducts, setCartProducts] = useState([]);
+
+     useEffect(() => {
+         const getProducts = async () => {
+             const result = productStore.cartProducts
+             setCartProducts(result);
+         }
+ 
+         getProducts();
+     }, [productStore])
 
     return (
         <Drawer
@@ -22,12 +33,15 @@ const Cart = ({cartOpen, cartClose}) => {
                     <ListItemText primary="Cart" />
                 </ListItem>
                 <Divider />
-                {!productStore.cartProducts.length ? (
-                    <ListItem>Корзина пуста!</ListItem>
+                {!cartProducts.length ? (
+                    <ListItem>Cart is empty!</ListItem>
                 ) : (
                     <>
-                    {productStore.cartProducts.map((item) => (
-                        <CartItem key={item.name} {...item} />
+                    {cartProducts.map((item) => (
+                        <CartItem 
+                        key={item.name} 
+                        removeProduct={(name) => setCartProducts(cartProducts.filter(x => x.name !== name))} 
+                        {...item} />
                     ))}
                     <Divider />
                     </>

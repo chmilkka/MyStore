@@ -26,7 +26,10 @@ export default class ProductStore {
 
     addProductToCart = async (product) => {
         this.cartProducts.push(product);
-        console.log(this.cartProducts)
+    }
+
+    removeProductFromCart = async (name) => {
+        this.cartProducts = this.cartProducts.filter(x => x.name !== name)
     }
 
 }
