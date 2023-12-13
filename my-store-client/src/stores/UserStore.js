@@ -1,8 +1,6 @@
 import { makeAutoObservable } from "mobx";
 import { store } from "./StoresManager";
-import { toast } from "react-toastify";
 import { agent } from "./agent";
-import { Roles } from "../models/UserModel";
 
 export default class UserStore {
     user = null;
@@ -54,8 +52,6 @@ export default class UserStore {
             return this.user;
         } else {
             const response = await agent.Auth.getAuthenticatedUserInfo();
-
-            // this.base.handleErrors(response);
             
             if(response !== null) {
                 this.user = response;
