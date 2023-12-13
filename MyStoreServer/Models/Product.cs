@@ -10,5 +10,6 @@
         public double Price { get; set; }
         public string? Photo { get; set; }
 
+
     }
 }
