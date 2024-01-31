@@ -88,16 +88,6 @@ const style = {
                       Price: {price} UAH
                 </Typography>
             </Box>
-            {/* <Button 
-                type='submit' 
-                color='success' 
-                variant="contained" 
-                onClick={handleOpen}
-                sx={{margin: "10px 0", width: "200px"}} 
-                >
-                    Buy
-            </Button> */}
-            
           </Box>
         </Modal>
       </div>

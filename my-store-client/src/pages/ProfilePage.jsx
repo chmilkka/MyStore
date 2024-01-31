@@ -1,5 +1,4 @@
 import { Button, Card, CardMedia, Grid, TextField, Typography } from "@mui/material";
-import Header from "../components/Header";
 import BasicModal from "../components/BasicModal";
 import { useStore } from "../stores/StoresManager";
 import { useEffect, useRef, useState } from "react";
@@ -74,91 +73,80 @@ const ProfilePage = () => {
         }
     }
 
-   
     
     return (
         <div>
-            <Header/>
-                <Grid align='center'>
-                    <Typography
-                        variant= "h4"
-                        sx={{
-                        m: "10px",
-                        textAlign: "center"        
-                        }}
+            <Grid align='center'>
+                <Typography
+                    variant= "h4"
+                    sx={{
+                    m: "10px",
+                    textAlign: "center"        
+                    }}
                     >
                     Profile
-                    </Typography> 
-                    <Typography
-                        variant= "h6"
-                        sx={{
-                       
-                        textAlign: "center"        
-                        }}
+                </Typography> 
+                <Typography
+                    variant= "h6"
+                    sx={{   
+                    textAlign: "center"        
+                    }}
                     >
                     Role: {currentUser.role}
-                    </Typography> 
-                    <Card sx={{width: "40ch"}}>
-                        <CardMedia
-                         image={currentUser.photo}
-                         component="img"
-                         alt= " "
-                         title= " "
-                         sx={{ 
-                             width: "40ch",
-                             height: 230,
-                            
-     
-                         }}/>
-
-                       
-                    </Card>
-                    <TextField 
-                        variant='standard'
-                        label='FirstName'
-                        helperText={firstNameErrors}
-                        error={firstNameErrors.length !== 0}
-                        inputRef={firstNameRef} 
-                        value={firstName}
-                        onFocus={(e) => handleFirstNameChange(e)}
-                        onChange={handleFirstNameChange}
-                        sx={{width: "35ch"}}            
-                    />
-                    <div></div>
-                    <TextField 
-                        variant='standard' 
-                        label='LastName'
-                        helperText={lastNameErrors}
-                        error={lastNameErrors.length !== 0}
-                        inputRef={lastNameRef}
-                        value={lastName} 
-                        onFocus={(e) => handleLastNameChange(e)}
-                        onChange={handleLastNameChange}
-                        sx={{width: "35ch"}}      
-                    /> 
-                    <div></div>
-                    <Button 
-                        type='submit' 
-                        color='primary' 
-                        variant="contained" 
-                        onClick={submit}
-                        sx={{margin: "10px 0"}} 
-                        >
-                            Save changes
-                    </Button>
-                    <div></div>
-                    <div></div>
-                    {
-                    currentUser.role === "Admin"
-                     &&
-                     <>
-                     <BasicModal/>
-                     
-                     </>
-                    }
-                   
-                </Grid>
-           
+                </Typography> 
+                <Card sx={{width: "40ch"}}>
+                    <CardMedia
+                        image={currentUser.photo}
+                        component="img"
+                        alt= " "
+                        title= " "
+                        sx={{ 
+                            width: "40ch",
+                            height: 230,
+                        }}/>                      
+                </Card>
+                <TextField 
+                    variant='standard'
+                    label='FirstName'
+                    helperText={firstNameErrors}
+                    error={firstNameErrors.length !== 0}
+                    inputRef={firstNameRef} 
+                    value={firstName}
+                    onFocus={(e) => handleFirstNameChange(e)}
+                    onChange={handleFirstNameChange}
+                    sx={{width: "35ch"}}            
+                />
+                <br></br>
+                <TextField 
+                    variant='standard' 
+                    label='LastName'
+                    helperText={lastNameErrors}
+                    error={lastNameErrors.length !== 0}
+                    inputRef={lastNameRef}
+                    value={lastName} 
+                    onFocus={(e) => handleLastNameChange(e)}
+                    onChange={handleLastNameChange}
+                    sx={{width: "35ch"}}      
+                /> 
+                <br></br>
+                <Button 
+                    type='submit' 
+                    color='primary' 
+                    variant="contained" 
+                    onClick={submit}
+                    sx={{margin: "10px 0"}} 
+                    >
+                        Save changes
+                </Button>
+                <br></br>
+                {
+                currentUser.role === "Admin"
+                    &&
+                    <>
+                    <BasicModal/>  
+                    </>
+                }                  
+            </Grid>       
         </div>
     );
 };

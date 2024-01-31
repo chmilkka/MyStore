@@ -13,6 +13,7 @@ import { observer } from "mobx-react-lite";
 import AppLoader from "./AppLoader";
 import LoadingComponent from "./components/Loader/LoadingComponent";
 import { useStore } from "./stores/StoresManager";
+import Header from "./components/Header";
 
 
 
@@ -30,6 +31,7 @@ function App() {
   
     <BrowserRouter>
       <React.StrictMode>
+        <Header></Header>
         <AppRouter/>
           <ToastContainer 
             position={"bottom-right"} 
