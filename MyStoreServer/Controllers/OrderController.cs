@@ -7,21 +7,21 @@ using MyStoreServer.Services;
 
 namespace MyStoreServer.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/orders")]
     [ApiController]
     public class OrderController : ControllerBase
     {
-        private readonly IProductService _orderService;
-        public OrderController(IProductService tasksService)
+        private readonly IOrderService _orderService;
+        public OrderController(IOrderService orderService)
         {
-            _orderService = tasksService;
+            _orderService = orderService;
         }
 
         [Authorize]
         [HttpPost]
-        public ActionResult CreateOrder([FromBody] Product request)
+        public ActionResult CreateOrder([FromBody] RequestOrder requestOrder)
         {
-            _orderService.CreateOrder(request);
+            _orderService.CreateOrder(requestOrder);
             return Ok();
         }
     }

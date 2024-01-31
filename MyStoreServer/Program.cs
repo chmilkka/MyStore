@@ -113,6 +113,8 @@ internal class Program
             });
 
             builder.Services.AddTransient<IProductService, ProductService>();
+            builder.Services.AddTransient<IOrderService, OrderService>();
+            builder.Services.AddScoped<IOrderStorage, OrderStorage>();
             builder.Services.AddTransient<IAuthenticationService, AuthenticationService>();
             builder.Services.AddScoped<IProductStorage, ProductStorage>();
             builder.Services.AddTransient<IUserService, UserService>();

@@ -4,6 +4,6 @@ namespace MyStoreServer.Services
 {
     public interface IOrderService
     {
-        void CreateOrder (Product product);
+        void CreateOrder (RequestOrder order);
     }
 }
