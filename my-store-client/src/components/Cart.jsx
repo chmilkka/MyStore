@@ -1,14 +1,40 @@
 import { ShoppingCart } from "@mui/icons-material";
-import { Divider, Drawer, List, ListItem, ListItemIcon, ListItemText } from "@mui/material";
+import { Button, Divider, Drawer, List, ListItem, ListItemIcon, ListItemText, Typography } from "@mui/material";
 import { useStore } from "../stores/StoresManager";
 import CartItem from "./CartItem";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 const Cart = ({cartOpen, cartClose}) => {
 
      const { productStore } = useStore();
+     const { userStore } = useStore();
+     const {orderStore} = useStore();
 
      const [cartProducts, setCartProducts] = useState([]);
+
+     const currentUser = userStore.user;
+
+    
+
+    const createOrder= async () => {
+
+        const productsId = []
+        productStore.cartProducts.map((item) => productsId.push(item.id))
+
+        const order = {
+            userId: currentUser.id,
+            productsId: productsId
+        }; 
+        try {
+            await orderStore.createOrder(order)
+            productStore.cartProducts = []
+            setCartProducts([])
+            toast.success("Order has been successfully created!")           
+        } catch (error) {
+            toast.error("Failed to create order")
+        }
+      }
 
      useEffect(() => {
          const getProducts = async () => {
@@ -17,7 +43,7 @@ const Cart = ({cartOpen, cartClose}) => {
          }
  
          getProducts();
-     }, [productStore])
+     }, [productStore.cartProducts])
 
     return (
         <Drawer
@@ -44,6 +70,24 @@ const Cart = ({cartOpen, cartClose}) => {
                         {...item} />
                     ))}
                     <Divider />
+                    <ListItem>
+                        <Typography sx={{fontWeight: 700}}>
+                            Total price{' '}
+                            {cartProducts.reduce((acc, item) => {
+                            return acc + item.price;
+                            }, 0)}{' '}
+                            UAH
+                        </Typography>
+                    </ListItem>
+                    <Button 
+                    type='submit' 
+                    color='success' 
+                    variant="contained" 
+                    onClick={createOrder}
+                    sx={{margin: "10px"}} 
+                    >
+                    Place an order
+                    </Button>
                     </>
                 )}
             </List>

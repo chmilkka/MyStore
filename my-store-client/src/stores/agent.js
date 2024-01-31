@@ -55,10 +55,15 @@ const Products = {
     removeProduct: (id) => requests.delete(`/products/${id}`),
 }
 
+const Orders = {
+    createOrder: (body) => requests.post(`/orders`, body),
+}
+
 export const agent = {
     Auth,
     User,
     Products,
+    Orders
 };
 
 function checkStatusCode (error) {

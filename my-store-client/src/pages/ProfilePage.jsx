@@ -153,14 +153,7 @@ const ProfilePage = () => {
                      &&
                      <>
                      <BasicModal/>
-                     <Button 
-                         type='submit' 
-                         color='error' 
-                         variant="contained" 
-                         sx={{margin: "10px "}} 
-                         >
-                             Delete product
-                     </Button>
+                     
                      </>
                     }
                    

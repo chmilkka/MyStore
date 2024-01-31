@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 
 const CartItem = ({ id, name, price, quantity, removeProduct}) => {
     const { productStore } = useStore();
-
+    
 
     const removeProductFromCart= async () => {
             
@@ -23,7 +23,7 @@ const CartItem = ({ id, name, price, quantity, removeProduct}) => {
             <Typography
                 variant="body1"
             >
-                {name} {price}UAH
+                {name} | {price} UAH
             </Typography>
             <IconButton
             onClick={removeProductFromCart}
