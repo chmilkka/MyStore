@@ -19,19 +19,20 @@ const Cart = ({cartOpen, cartClose}) => {
 
     const createOrder= async () => {
 
-        const a = []
-        productStore.cartProducts.map((item) => a.push(item.id))
+        const productsId = []
+        productStore.cartProducts.map((item) => productsId.push(item.id))
 
         const order = {
             userId: currentUser.id,
-            productsId: a
+            productsId: productsId
         }; 
-            console.log(order)
         try {
             await orderStore.createOrder(order)
-            toast.success("Product removed from cart!")           
+            productStore.cartProducts = []
+            setCartProducts([])
+            toast.success("Order has been successfully created!")           
         } catch (error) {
-            toast.error("Failed to remove product")
+            toast.error("Failed to create order")
         }
       }
 
@@ -42,7 +43,7 @@ const Cart = ({cartOpen, cartClose}) => {
          }
  
          getProducts();
-     }, [productStore])
+     }, [productStore.cartProducts])
 
     return (
         <Drawer

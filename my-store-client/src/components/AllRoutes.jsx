@@ -16,7 +16,7 @@ const AllRoutes = () => {
     return (
        
             <Routes>
-                <Route index replace element={<Navigate to="/register"/>}/>
+                <Route index replace element={<Navigate to="/login"/>}/>
                 <Route path ="/login" element={<LoginPage/>}/>
                 <Route path ="/logout" element={<Logout/>}/>
                 <Route path="/register" element={<RegisterPage/>}/>

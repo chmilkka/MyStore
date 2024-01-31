@@ -88,7 +88,7 @@ const style = {
                       Price: {price} UAH
                 </Typography>
             </Box>
-            <Button 
+            {/* <Button 
                 type='submit' 
                 color='success' 
                 variant="contained" 
@@ -96,7 +96,7 @@ const style = {
                 sx={{margin: "10px 0", width: "200px"}} 
                 >
                     Buy
-            </Button>
+            </Button> */}
             
           </Box>
         </Modal>
