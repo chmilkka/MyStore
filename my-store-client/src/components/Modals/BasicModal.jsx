@@ -1,4 +1,4 @@
-import { Box, Button, InputLabel, MenuItem, Modal, Select, TextField, Typography } from "@mui/material";
+import { Box, Button, InputLabel, Modal, NativeSelect, TextField, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useStore } from "../../stores/StoresManager";
 import { toast } from "react-toastify";
@@ -13,6 +13,9 @@ export default function BasicModal() {
   const [name, setName] = useState('');
   const [nameErrors, setNameErrors] = useState('');
 
+  const [type, setType] = useState('');
+  const [typeErrors, setTypeErrors] = useState('');
+
   const [description, setDescription] = useState('');
 
   const [price, setPrice] = useState('');
@@ -25,21 +28,16 @@ export default function BasicModal() {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const [type, setType] = useState('');
-
    useEffect(() => {    
         validateForm();
-    }, [ name, price, quantity]);
+    }, [ name, type, price, quantity]);
 
      const validateForm = () => {
         validateName();
+        validateType();
         validatePrice();
         validateQuantity();
     }
-
-  const handleChange = (event) => {
-    setType(event.target.value);
-  };
 
   const validateName = () => {
       if (name.length === 0) {
@@ -53,6 +51,19 @@ export default function BasicModal() {
         setNameErrors('');
       }
   } 
+
+  const validateType = () => {
+    if (type.length === 0) {
+      setTypeErrors("Fill in the Price input");
+    } 
+    else if (type.length >= 40)
+    {
+      setTypeErrors("Max length 30 letters");
+    }
+    else {
+      setTypeErrors('');
+    }
+} 
 
   const validatePrice = () => {
       if (price.length === 0) {
@@ -79,11 +90,19 @@ export default function BasicModal() {
       }
    }
 
+   const handlePrice = (value) => {
+    if(value >= 0)
+      {
+        setPrice(value)
+      }
+   }
+
 
   const hasErrors = () => {
     const hasAnyErrors = nameErrors.length 
                       || priceErrors.length 
                       || quantityErrors.length
+                      || typeErrors.length
     return hasAnyErrors;
 }
 
@@ -137,6 +156,23 @@ const submit = async () => {
             >
             Add Product
            </Typography>
+           <br></br>
+           <InputLabel variant="standard" htmlFor="uncontrolled-native">
+            Type
+           </InputLabel>
+           <NativeSelect
+                sx={{width: "280px", margin:"5px", textAlign: "left", color: "inherit"}}
+                value={type}
+                defaultValue= {"Blender"}
+                onChange={e => setType(e.target.value)}
+            >
+             
+            <option value={"Blender"}>Blender</option>
+            <option value={"Kettle"}>Electric kettle</option>
+            <option value={"Refrigerator"}>Refrigerator</option>
+            <option value={"Multicooker"}>Multicooker</option>
+            </NativeSelect>
+            <br></br>
            <TextField 
                 variant='outlined'
                 label='ProductName' 
@@ -144,43 +180,20 @@ const submit = async () => {
                 error={nameErrors.length !== 0} 
                 value={name}
                 onChange={e => setName(e.target.value)}
-                sx={{width: "35ch"}}            
+                sx={{width: "35ch", margin:"5px"}}            
            />
-           <div></div>
-           <InputLabel>Type</InputLabel>
-           <Select
-                sx={{width: "280px", margin:"5px", textAlign: "left", color: "inherit"}}
-                value={type}
-                label = "Type"
-                onChange={handleChange}
-            >
-            <MenuItem value={"Blender"}>Blender</MenuItem>
-            <MenuItem value={"Kettle"}>Electric kettle</MenuItem>
-            <MenuItem value={"Refrigerator"}>Refrigerator</MenuItem>
-            <MenuItem value={"Multicooker"}>Multicooker</MenuItem>
-            </Select>
-            <div></div>
-            <TextField
-                variant='outlined'
-                label='Description'
-                value={description}
-                onChange={e => setDescription(e.target.value)} 
-                rows={4}
-                sx={{width: "35ch"}}
-                multiline
-            />
-            <div></div>
-            <TextField 
+           <br></br>
+           <TextField 
                 variant='outlined'
                 label='Price(UAH)'
                 type="number"
                 helperText={priceErrors}
                 error={priceErrors.length !== 0} 
                 value={price}
-                onChange={e => setPrice(e.target.value)} 
+                onChange={e => handlePrice(e.target.value)} 
                 sx={{width: "35ch", margin:"5px"}}            
            />
-            <div></div>
+            <br></br>
            <TextField 
                 variant='outlined'
                 label='Quantity'
@@ -191,7 +204,17 @@ const submit = async () => {
                 onChange={e => handleQuantity(e.target.value)} 
                 sx={{width: "35ch"}}            
            />
-           <div></div>
+            <br></br>
+            <TextField
+                variant='outlined'
+                label='Description'
+                value={description}
+                onChange={e => setDescription(e.target.value)} 
+                rows={4}
+                sx={{width: "35ch", margin:"5px"}}
+                multiline
+            />
+            <br></br>
             <Button 
                 type='submit' 
                 color='success' 
