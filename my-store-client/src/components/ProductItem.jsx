@@ -1,9 +1,8 @@
 import { CloseOutlined, ShoppingCart } from "@mui/icons-material";
-import { Button, Card, CardActions, CardContent, CardMedia, Grid, IconButton, Typography } from "@mui/material"
-import ProductModal from "./ProductModal";
+import { Card, CardActions, CardContent, CardMedia, Grid, IconButton, Typography } from "@mui/material"
+import ProductModal from "./Modals/ProductModal";
 import { useStore } from "../stores/StoresManager";
 import { toast } from "react-toastify";
-import { useEffect, useState } from "react";
 
 
 const ProductItem = ({id, type, name, price, photo, description, removeProduct}) => {

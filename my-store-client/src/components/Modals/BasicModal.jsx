@@ -1,22 +1,9 @@
 import { Box, Button, InputLabel, MenuItem, Modal, Select, TextField, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
-import { useStore } from "../stores/StoresManager";
+import { useStore } from "../../stores/StoresManager";
 import { toast } from "react-toastify";
+import { modalStyle } from "./ModalStyle";
 
-
-const modalStyle = {
-  
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 800,
-  height: 550,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 24,
-  p: 4,
-};
 
 export default function BasicModal() {
 
@@ -84,6 +71,14 @@ export default function BasicModal() {
         setQuantityErrors('');
       }
   }
+
+   const handleQuantity = (value) => {
+    if(value >= 0)
+      {
+        setQuantity(value)
+      }
+   }
+
 
   const hasErrors = () => {
     const hasAnyErrors = nameErrors.length 
@@ -193,7 +188,7 @@ const submit = async () => {
                 helperText={quantityErrors}
                 error={quantityErrors.length !== 0} 
                 value={quantity}
-                onChange={e => setQuantity(e.target.value)} 
+                onChange={e => handleQuantity(e.target.value)} 
                 sx={{width: "35ch"}}            
            />
            <div></div>

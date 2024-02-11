@@ -1,5 +1,5 @@
 import { Button, Card, CardMedia, Grid, TextField, Typography } from "@mui/material";
-import BasicModal from "../components/BasicModal";
+import BasicModal from "../components/Modals/BasicModal";
 import { useStore } from "../stores/StoresManager";
 import { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";

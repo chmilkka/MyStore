@@ -1,21 +1,7 @@
 import { Box, Button, Card, CardMedia, Modal, TextField, Typography } from "@mui/material";
 import { useState } from "react";
+import { modalStyle } from "./ModalStyle";
 
-const style = {
-    position: 'absolute',
-    display: "flex",
-    alignItems: "center",
-    flexDirection: "column",
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    height: 550,
-    width: 700,
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
-    boxShadow: 24,
-    p: 4,
-  };
   
   export default function ProductModal({name, price, photo, description}) {
     const [open, setOpen] = useState(false);
@@ -42,7 +28,10 @@ const style = {
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
         >
-          <Box sx={style}>
+          <Box sx={{...modalStyle,
+              display: "flex",
+              alignItems: "center",
+              flexDirection: "column",}}>
             <Box>
                 <Card sx={{width: 300, height: 270, justifyContent: "center", display: "flex"}}>
                     <CardMedia

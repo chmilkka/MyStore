@@ -1,5 +1,5 @@
 import { AccountCircle, ShoppingCart } from "@mui/icons-material"
-import { AppBar, Button, IconButton, Toolbar, Typography } from "@mui/material"
+import { AppBar, Button, IconButton, Toolbar } from "@mui/material"
 import { useStore } from "../stores/StoresManager";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
