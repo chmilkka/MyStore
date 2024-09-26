@@ -1,4 +1,4 @@
-import { Button, Card, CardMedia, Grid, TextField, Typography } from "@mui/material";
+import { Box, Button, Card, CardMedia, Grid, TextField, Typography } from "@mui/material";
 import BasicModal from "../components/Modals/BasicModal";
 import { useStore } from "../stores/StoresManager";
 import { useEffect, useRef, useState } from "react";
@@ -75,12 +75,32 @@ const ProfilePage = () => {
 
     
     return (
-        <div>
-            <Grid align='center'>
-                <Typography
+           <Grid container spacing={2}>
+                <Grid item xs={4} md={4} align="center" sx={{mt:"10px"}}>           
+                <Card sx={{width: '80%', flexShrink: 0}}>
+                    <CardMedia
+                        image={currentUser.photo}
+                        component="img"
+                        alt= " "
+                        title= " "
+                        sx={{ 
+                            width: "100%",
+                            height: 230,
+                        }}/>                      
+                </Card>
+                <Button 
+                    type='submit' 
+                    color='primary' 
+                    variant="contained" 
+                    sx={{margin: "10px 0"}} 
+                    >
+                        Upload photo
+                </Button>
+            </Grid>
+            <Grid item xs={2} md={3} align="center" sx={{mt:"10px"}}>
+            <Typography
                     variant= "h4"
                     sx={{
-                    m: "10px",
                     textAlign: "center"        
                     }}
                     >
@@ -94,17 +114,6 @@ const ProfilePage = () => {
                     >
                     Role: {currentUser.role}
                 </Typography> 
-                <Card sx={{width: "40ch"}}>
-                    <CardMedia
-                        image={currentUser.photo}
-                        component="img"
-                        alt= " "
-                        title= " "
-                        sx={{ 
-                            width: "40ch",
-                            height: 230,
-                        }}/>                      
-                </Card>
                 <TextField 
                     variant='standard'
                     label='FirstName'
@@ -145,9 +154,10 @@ const ProfilePage = () => {
                     <>
                     <BasicModal/>  
                     </>
-                }                  
-            </Grid>       
-        </div>
+                }              
+            </Grid>
+        </Grid>
+                   
     );
 };
 export default ProfilePage;

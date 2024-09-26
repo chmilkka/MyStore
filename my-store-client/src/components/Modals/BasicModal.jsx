@@ -13,7 +13,7 @@ export default function BasicModal() {
   const [name, setName] = useState('');
   const [nameErrors, setNameErrors] = useState('');
 
-  const [type, setType] = useState('');
+  const [type, setType] = useState('Blender');
   const [typeErrors, setTypeErrors] = useState('');
 
   const [description, setDescription] = useState('');
@@ -163,10 +163,8 @@ const submit = async () => {
            <NativeSelect
                 sx={{width: "280px", margin:"5px", textAlign: "left", color: "inherit"}}
                 value={type}
-                defaultValue= {"Blender"}
                 onChange={e => setType(e.target.value)}
             >
-             
             <option value={"Blender"}>Blender</option>
             <option value={"Kettle"}>Electric kettle</option>
             <option value={"Refrigerator"}>Refrigerator</option>

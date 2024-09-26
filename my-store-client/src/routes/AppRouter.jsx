@@ -8,6 +8,8 @@ import TypesPage from '../pages/TypesPage';
 import { Auth } from '../components/RequiresAuth';
 import { useStore } from '../stores/StoresManager';
 import ProfilePage from '../pages/ProfilePage';
+import ProfileList from '../pages/AccountPage';
+import OrdersPage from '../pages/OrdersPage';
 
 
 const AllRoutes = () => {
@@ -19,7 +21,10 @@ const AllRoutes = () => {
             <Route path ="/login" element={<LoginPage/>}/>
             <Route path ="/logout" element={<Logout/>}/>
             <Route path="/register" element={<RegisterPage/>}/>
-            <Route path ="/profile" element={<Auth ><ProfilePage/></Auth>}/>
+            <Route path ="/account" element={<Auth ><ProfileList/></Auth>}>
+                <Route path ="profile" element={<ProfilePage/>}/>
+                <Route path ="orders" element={<OrdersPage/>}/>
+            </Route>
             <Route path="/products/:type" element={<Auth ><ProductsPage /></Auth>}/>
             <Route path="/types" element={<Auth ><TypesPage/></Auth>}/>
             <Route path='*'element={<NotFoundPage/>}/>

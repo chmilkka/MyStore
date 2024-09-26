@@ -16,8 +16,8 @@ function Header()
     const logout = () => {
         navigate('/logout');
     }
-    const profile = () => {
-        navigate('/profile');
+    const account = () => {
+        navigate('/account/profile');
     }
     const types = () => {
         navigate('/types');
@@ -25,7 +25,7 @@ function Header()
 
 
     return (
-        <AppBar position="static">
+        <AppBar position="static" sx={{margin: "10px 0"}} >
             <Toolbar>
                 <Button
                     color="inherit" 
@@ -44,7 +44,7 @@ function Header()
                 aria-controls="menu-appbar"
                 aria-haspopup="true"            
                 color="inherit"
-                onClick={profile}
+                onClick={account}
                 >
                 <AccountCircle />
                 </IconButton>
