@@ -5,7 +5,7 @@ import { redirect } from "react-router-dom";
 
 
 
-axios.defaults.baseURL = "https://localhost:7114/api";
+axios.defaults.baseURL = "http://localhost:7114/api";
 
 axios.interceptors.request.use((config) => {
     const token = store.commonStore.token;
